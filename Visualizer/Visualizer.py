@@ -31,8 +31,8 @@ class Visualizer:
         # 设置坐标轴范围和刻度
         plt.xlim(0, self.scale_x)
         plt.ylim(0, self.scale_y)
-        plt.xticks(range(self.scale_x + 1))
-        plt.yticks(range(self.scale_y + 1))
+        plt.xticks(range(self.scale_x + 1), fontsize=6)
+        plt.yticks(range(self.scale_y + 1), fontsize=6)
         # 设置图例
         plt.legend(loc='lower right')
         # 设置网格

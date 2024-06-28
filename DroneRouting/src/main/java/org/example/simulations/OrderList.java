@@ -52,5 +52,6 @@ public class OrderList {
             }
             distributionCenters[flag].orders.add(order);
         }
+        orders.clear();
     }
 }

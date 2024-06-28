@@ -3,6 +3,7 @@ package org.example.utils;
 import org.example.entities.Position;
 import org.example.entities.Priority;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Util {
@@ -14,5 +15,20 @@ public class Util {
 
     public static Priority randomPriority() {
         return Priority.values()[random.nextInt(Priority.values().length)];
+    }
+
+    public static double pathLength(ArrayList<Position> path) {
+        double totalLength = 0.0;
+        for (int i = 0; i < path.size(); i++) {
+            Position current = path.get(i);
+            Position next = path.get((i + 1) % path.size());
+            totalLength += distance(current, next);
+        }
+        return totalLength;
+    }
+
+    public static double pathTime(ArrayList<Position> path, double speed) {
+        double totalLength = pathLength(path);
+        return totalLength / speed;
     }
 }

@@ -1,17 +1,20 @@
 package org.example;
 
 import org.example.entities.DistributionCenter;
+import org.example.entities.Drone;
+import org.example.entities.Position;
 import org.example.entities.Priority;
 import org.example.simulations.Init;
 import org.example.simulations.OrderList;
 import org.example.utils.Util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         Init init = new Init();
-        init.loadMap(0);
+        init.loadMap(1);
 
 //        System.out.println(Arrays.toString(init.getDistributionCenters()));
 //        System.out.println(Arrays.toString(init.getDischargePoints()));
@@ -24,13 +27,30 @@ public class Main {
 //        System.out.println(Priority.LOW);
 
         OrderList orderList = new OrderList();
-        orderList.newOrders(init.getDischargePoints(), 3, 0);
+        orderList.newOrders(init.getDischargePoints(), 10, 0);
         System.out.println(orderList.orders);
 
         System.out.println();
         orderList.orderDistribution(init.getDistributionCenters());
         for (DistributionCenter distributionCenter : init.getDistributionCenters()) {
             System.out.println(distributionCenter.orders);
+        }
+        System.out.println(orderList.orders);
+
+//        ArrayList<Position> path = new ArrayList<>();
+//        path.add(new Position(6, 34));
+//        path.add(new Position(13, 37));
+//        path.add(new Position(14, 37));
+//        path.add(new Position(11, 32));
+//        double length = Util.pathLength(path);
+//        System.out.println("Path length: " + length);
+
+        System.out.println();
+        for (DistributionCenter distributionCenter : init.getDistributionCenters()) {
+            distributionCenter.droneSchedule(5, 20, 1);
+            for (Drone Drone : distributionCenter.getDrones()) {
+                System.out.println(Drone.getPath());
+            }
         }
     }
 }

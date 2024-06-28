@@ -70,18 +70,30 @@ public class DistributionCenter {
         }
     }
 
-    public void droneSchedule(int n, double maxDis, double s) {
+    public double droneSchedule(int n, double maxDis, double s, boolean flag) {
         System.out.println("***************************************");
         System.out.println("当前该中心订单总数：" + orders.size());
-        Random random = new Random();
         ArrayList<Order> ordersPlan = new ArrayList<>();
-        for (Order order : orders) {
-            if (order.remainTime <= 30) {
-                ordersPlan.add(order);
-            } else if (order.remainTime <= 90) {
-                if (random.nextInt(2) == 1) {
-                    ordersPlan.add(order);
+        if (flag) {
+            ordersPlan.addAll(orders);
+            orders.clear();
+        } else {
+            Random random = new Random();
+            ArrayList<Integer> removeOrders = new ArrayList<>();
+            for (int i = 0; i < orders.size(); i++) {
+                if (orders.get(i).remainTime <= 30) {
+                    ordersPlan.add(orders.get(i));
+                    removeOrders.add(i);
+                } else {
+                    if (random.nextInt(2) == 1) {
+                        ordersPlan.add(orders.get(i));
+                        removeOrders.add(i);
+                    }
                 }
+            }
+            removeOrders.sort(Collections.reverseOrder());
+            for (int i : removeOrders) {
+                orders.remove(i);
             }
         }
         System.out.println("本次配送订单个数：" + ordersPlan.size());
@@ -107,5 +119,11 @@ public class DistributionCenter {
         }
         System.out.println("本配送中心本次出动无人机：" + drones.size());
         System.out.println("***************************************");
+
+        double totalDistance = 0;
+        for (Drone drone : drones) {
+            totalDistance += Util.pathLength(drone.getPath());
+        }
+        return totalDistance;
     }
 }

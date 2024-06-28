@@ -1,19 +1,12 @@
 package org.example.entities;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class DischargePoint {
     Position position;
-    Order[] orders;
 
     public DischargePoint(Position position) {
         this.position = position;
-    }
-
-    public DischargePoint(Position position, Order[] orders) {
-        this.position = position;
-        this.orders = orders;
     }
 
     public Position getPosition() {
@@ -22,14 +15,6 @@ public class DischargePoint {
 
     public void setPosition(Position position) {
         this.position = position;
-    }
-
-    public Order[] getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Order[] orders) {
-        this.orders = orders;
     }
 
     @Override

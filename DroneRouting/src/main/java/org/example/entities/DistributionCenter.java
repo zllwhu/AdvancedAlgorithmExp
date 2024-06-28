@@ -1,12 +1,20 @@
 package org.example.entities;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class DistributionCenter {
     Position position;
+    public ArrayList<Order> orders;
+
+    public DistributionCenter(Position position, ArrayList<Order> orders) {
+        this.position = position;
+        this.orders = orders;
+    }
 
     public DistributionCenter(Position position) {
         this.position = position;
+        this.orders = new ArrayList<>();
     }
 
     public Position getPosition() {
@@ -15,6 +23,14 @@ public class DistributionCenter {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
